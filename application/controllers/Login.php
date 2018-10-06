@@ -28,7 +28,23 @@
 
             $this->load->view('login/login', $data);
 
-        } // end of login
+		} // end of login
+		
+		public function cekIp($ip){
+
+			// ipKantor
+			$ipKantor = array('114', '139', '111');
+			$ip = substr($ip, 0, 3);
+			// jika bukan ipKantor
+			for($i=0; $i < count($ipKantor); $i++){
+				if($ip == $ipKantor[$i]){
+					return true;
+				}
+			}
+	
+			return false;
+	
+		} // end of function cekIp
 
         public function validasi(){
 
@@ -61,6 +77,7 @@
 				$password = $this->input->post('password');
 				$ip = null;
 
+				// ambil ip address
 				// jika di live server
 				if(!empty($_SERVER['HTTP_CLIENT_IP'])){
 					function get_visitor_ip() {
@@ -107,7 +124,13 @@
 					}
 
 					$ip = get_client_ip_env();
-				}
+					
+				} // end of ambil ip address
+
+				// cek ip
+				// if(!$this->cekIp($ip)){
+				//     redirect('ipsalah');
+				// }
 
 				//ambil data dari model login_model
 				$result = $this->login_model->login($username, $password, $ip, $status);

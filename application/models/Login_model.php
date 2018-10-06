@@ -7,17 +7,6 @@
       $this->load->database();
     }
 
-    public function cekIp($ip){
-
-        // jika bukan ip kantor (111.95.204.211)
-        if($ip != '111.95.204.211'){
-            return false;
-        }
-
-        return true;
-
-    } // end of function cekIp
-
     public function simpanAbsen($id_karyawan, $status){
 
         $tanggal = date('d');
@@ -70,12 +59,17 @@
 
     } // end of function ambilDataKaryawan
 
-    public function login($username, $password, $ip, $status){
+    public function simpanLog($id_karyawan, $ip, $status){
+        
+        $this->db->insert('log', array(
+            'id_karyawan' => $id_karyawan,
+            'ip' => $ip,
+            'status' => $status            
+        ));
 
-        // // cek ip
-        // if(!$this->cekIp($ip)){
-        //     redirect('ipsalah');
-        // }
+    }
+
+    public function login($username, $password, $ip, $status){
 
         // ambil data berdasarkan usename dan password yg diinput
         $result = $this->db->get_where('login', array('id_karyawan' => $username, 'password' => $password));
@@ -86,6 +80,9 @@
 
             // simpan data absen
             $this->simpanAbsen($username, $status);
+
+            // simpan log
+            $this->simpanLog($username, $ip, 'sukses');
 
             // ambil data karyawan
             $dataKaryawan = $this->ambilDataKaryawan($username);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2018 at 12:41 PM
+-- Generation Time: Oct 06, 2018 at 09:48 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -49,7 +49,12 @@ INSERT INTO `absen` (`id_absen`, `id_karyawan`, `waktu`, `status`, `hari`, `bula
 (4, 'erna', '2018-09-25 16:42:31', 'in', 'selasa', 'September', 2018),
 (5, 'erna', '2018-09-25 16:55:14', 'in', 'selasa', 'September', 2018),
 (6, 'erna', '2018-09-25 17:15:34', 'in', 'selasa', 'September', 2018),
-(7, 'hira', '2018-09-25 17:30:30', 'in', 'selasa', 'September', 2018);
+(7, 'hira', '2018-09-25 17:30:30', 'in', 'selasa', 'September', 2018),
+(8, 'erna', '2018-10-01 09:50:42', 'in', 'senin', 'October', 2018),
+(9, 'erna', '2018-10-01 09:51:17', 'in', 'senin', 'October', 2018),
+(10, 'erna', '2018-10-01 10:01:29', 'out', 'senin', 'October', 2018),
+(11, 'erna', '2018-10-01 10:19:18', 'in', 'senin', 'October', 2018),
+(12, 'erna', '2018-10-06 13:40:42', 'in', 'sabtu', 'October', 2018);
 
 -- --------------------------------------------------------
 
@@ -75,6 +80,30 @@ INSERT INTO `karyawan` (`id_karyawan`, `nama`, `alamat`, `no_telepon`, `jabatan`
 ('hira', 'Hira Yiyi Thanty', '', '', 'Admin', 'foto-hira1.jpg'),
 ('icha', 'Annisa Sancu', '', '', 'Keuangan', 'foto-icha1.jpg'),
 ('nurul94', 'Nurul Sancu', '', '', 'admin', 'foto-nurul1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log`
+--
+
+CREATE TABLE `log` (
+  `id_log` int(11) NOT NULL,
+  `id_karyawan` varchar(10) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ip` varchar(20) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`id_log`, `id_karyawan`, `time`, `ip`, `status`) VALUES
+(1, 'erna', '2018-10-01 09:51:17', '::1', 'sukses'),
+(2, 'erna', '2018-10-01 10:01:29', '::1', 'sukses'),
+(3, 'erna', '2018-10-01 10:19:18', '::1', 'sukses'),
+(4, 'erna', '2018-10-06 13:40:42', '::1', 'sukses');
 
 -- --------------------------------------------------------
 
@@ -116,6 +145,12 @@ ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id_karyawan`);
 
 --
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id_log`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -129,7 +164,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

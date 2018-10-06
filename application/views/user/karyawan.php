@@ -63,9 +63,15 @@
         <!-- greeting -->
         <h1 class="text-center" style="color: black;">
             
-            <?php if($_SESSION['jenisabsen'] == 'in'){echo 'Selamat Pagi,';} ?>
+            <?php if($_SESSION['jenisabsen'] == 'in'){echo 'Selamat Pagi,';}elseif($_SESSION['jenisabsen'] == 'out'){echo 'Selamat Sore,';} ?>
             <?php echo $_SESSION['karyawan']['nama'] ?>
         </h1>
+        
+        <?php if($_SESSION['jenisabsen'] == 'in') : ?>
+            <h2 class="text-center">Selamat Bekerja</h2>
+        <?php elseif($_SESSION['jenisabsen'] == 'out') : ?>
+            <h2 class="text-center">Hati2 di jalan...</h2>
+        <?php endif ?>
 
         <!-- waktu -->
         <h3 class="text-center">
@@ -74,10 +80,17 @@
         <h1 class="text-center" style="font-size: 70px; font-weight: bold; color: green">
             <?php echo $waktu ?>
         </h1>
-        <?php if($jam > 7 && $menit > 0): ?>
-            <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
-        <?php else: ?>
-            <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
+
+        <?php if($_SESSION['jenisabsen'] == 'in') : ?>
+            <?php if($jam < 8): ?>
+                <?php if($menit < 31) : ?>
+                    <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
+                <?php elseif($menit > 30) : ?>
+                    <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
+                <?php endif ?>
+            <?php else: ?>
+                <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
+            <?php endif ?>
         <?php endif ?>
 
         <!-- tombol kembali -->
