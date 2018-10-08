@@ -144,7 +144,8 @@
 						redirect('karyawan');
 					}
 					else if($level === '2'){
-						redirect('bos'); // jika level 2 ke agen
+						$_SESSION['level'] = '2';
+						redirect('admin'); // jika level 2 ke agen
 					}
 					else{
 						return false;

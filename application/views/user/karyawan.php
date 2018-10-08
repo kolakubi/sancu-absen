@@ -95,7 +95,7 @@
 
         <!-- tombol kembali -->
         <p class="text-center">
-            <a href="<?php echo base_url() ?>" class="btn btn-info btn-lg" style="width: 100px;">ok</a>
+            <a href="<?php echo base_url() ?>logout" class="btn btn-info btn-lg" style="width: 100px;">ok</a>
         </p>
     </div>
 </div>

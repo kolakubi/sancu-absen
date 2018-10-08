@@ -22,9 +22,10 @@
         {
           'targets': ['action'],
           'searchable': false,
-          'sortable': false
-        }
+          'sortable': false,
+        },
       ],
+      'pageLength' : 60,
       // munculin export ke excel
       dom: 'Bfrtip',
       buttons: [
@@ -202,14 +203,14 @@
       $.ajax({
         method: 'POST',
         dataType: 'text',
-        url: "getAgenJson",
+        url: "getKaryawanJson",
         data: {
           nama: val
         },
         success: function(data){
           data = JSON.parse(data);
           for(let i = 0; i<data.length; i++){
-            ul.append("<a href='#' class='list-group-item list-group-item-action pilih-agen' data-kode-agen="+data[i]['kode_agen']+">"+data[i]['nama']+"</a>");
+            ul.append("<a href='#' class='list-group-item list-group-item-action pilih-agen' data-kode-agen="+data[i]['id_karyawan']+">"+data[i]['nama']+"</a>");
           }
 
           // regis event klik ke list yg baru dibuat
