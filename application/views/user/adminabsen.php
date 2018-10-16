@@ -79,7 +79,8 @@
       <th>Tanggal</th>
       <th>Absen</th>
       <th>Status</th>
-      <th>Action</th>
+      <!-- <th>Action</th> -->
+      <th>Hari</th>
     </tr>
   </thead>
   <tbody>
@@ -94,22 +95,35 @@
 
             // logic terlambat
             if($absenDetail['status'] == 'in'){
+              // jika bukan hari sabtu
+              if($absenDetail['hari'] != 'sabtu'){
                 if($jam < 8){
-                $status = 'tidak terlambat';
-            
-                    if($menit < 31){
-                        $status = 'tidak terlambat';
-                    } 
-                        
-                    elseif($menit > 30){
-                        $status = 'terlambat';
-                        $jumlahTerlambat += 1;
-                    }
+                  $status = 'tidak terlambat';
+              
+                  if($menit < 31){
+                      $status = 'tidak terlambat';
+                  } 
+                      
+                  elseif($menit > 30){
+                      $status = 'terlambat';
+                      $jumlahTerlambat += 1;
+                  }
                 }    
                 else{
                     $status = 'terlambat';
                     $jumlahTerlambat += 1;
                 }
+              }
+              // jika hari sabtu
+              else{
+                if($jam > 7){
+                  if($menit > 0){
+                    $status = 'terlambat';
+                  }
+                }else{
+                  $status = 'tidak terlambat';
+                }
+              }
             }
         ?>
 
@@ -137,14 +151,16 @@
                 }
             ?>
         </td>
-        
-        <td>
+        <!-- button action -->
+        <!-- <td> -->
             <!-- tombol ubah -->
-            <a href="#" class="btn btn-warning">Ubah</a>
+            <!-- <a href="#" class="btn btn-warning">Ubah</a> -->
 
             <!-- tombol hapus -->
-            <a href="#" class="btn btn-warning">Hapus</a>
-        </td>
+            <!-- <a href="#" class="btn btn-warning">Hapus</a> -->
+        <!-- </td> -->
+
+        <td><?php echo $absenDetail['hari']?></td>
 
       </tr>
     <?php endforeach ?>
@@ -159,4 +175,10 @@
   </tfoot>
 </table>
 
-<h3 class="text-center text-danger">Jumlah Terlambat = <?php echo $jumlahTerlambat ?></h3>
+<!-- jumlah terlambat -->
+<!-- jika status = in -->
+<?php if(!empty($absen[0]['status'])) : ?>
+  <?php if($absen[0]['status'] == 'in') : ?>
+    <h3 class="text-center text-danger">Jumlah Terlambat = <?php echo $jumlahTerlambat ?></h3>
+  <?php endif ?>
+<?php endif ?>
