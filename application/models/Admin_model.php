@@ -28,7 +28,7 @@
             $this->db->where('absen.id_karyawan', $dataAmbil['id_karyawan']);
             $this->db->where('absen.waktu >=', $dataAmbil['dari']);
             $this->db->where('absen.waktu <=', $dataAmbil['sampai']);
-            $this->db->where('absen.status', $dataAmbil['status']);
+            $this->db->like('absen.status', $dataAmbil['status']);
             $result = $this->db->get()->result_array();
             return $result;
           }

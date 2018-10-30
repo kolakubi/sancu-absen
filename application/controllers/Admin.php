@@ -6,8 +6,8 @@
 
             parent::__construct();
             // cek session admin yaitu level 2
-            if($_SESSION['level']){
-                $sessionLevel = $_SESSION['level'];
+            if($_SESSION['level']['karyawan']){
+                $sessionLevel = $_SESSION['karyawan']['level'];
                 if($sessionLevel != 2){
                 // jika level bukan 2, redirect ke login
                 redirect('/');
