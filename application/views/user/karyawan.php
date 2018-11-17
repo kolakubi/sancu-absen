@@ -82,14 +82,26 @@
         </h1>
 
         <?php if($_SESSION['jenisabsen'] == 'in') : ?>
-            <?php if($jam < 8): ?>
-                <?php if($menit < 31) : ?>
-                    <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
-                <?php elseif($menit > 30) : ?>
+            <!-- jika hari senin - jumat -->
+            <?php if($hari != 'sabtu'): ?>
+                <?php if($jam < 8): ?>
+                    <?php if($menit < 31) : ?>
+                        <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
+                    <?php elseif($menit > 30) : ?>
+                        <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
+                    <?php endif ?>
+                <?php else: ?>
                     <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
                 <?php endif ?>
-            <?php else: ?>
-                <h3 class="text-center text-danger" style="font-weight: bold;">kamu terlambat</h3>
+            <!-- jika hari sabtu -->
+            <?php else : ?>
+                <?php if($jam > 7) : ?>
+                  <?php if($menit > 0) : ?>
+                    <h3 class="text-center text-success" style="font-weight: bold;">kamu terlambat</h3>
+                  <?php else : ?>
+                    <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
+                  <?php endif ?>
+                <?php endif ?>
             <?php endif ?>
         <?php endif ?>
 

@@ -151,6 +151,11 @@
             if($kemarin == $seminggu[$indexKe-1]){
                 return true;
             }
+            // jika kemarin = hari ini
+            // jika absen double
+            if($kemarin == $hariIni){
+                return true;
+            }
             else{
                 return false;
             }
