@@ -173,16 +173,39 @@
         $kemarin = strtotime("yesterday $jam:00");
         $kemarin = date("Y-m-d H:i:s\n", $kemarin);
 
-        $this->db->insert('absen', 
-            array(
-                'id_karyawan' => $id_karyawan,
-                'waktu' => $kemarin,
-                'status' => $status.' ALPHA',
-                'hari' => $this->cekHariKemarin(),
-                'bulan' => $bulan,
-                'tahun' => $tahun
-            )
-        );
+        // ambil hari
+        $hari = $this->cekHariKemarin();
+
+        // jika kemari = minggu
+        // insert kemarin = sabtu
+        if($hari == 'minggu'){
+            $this->db->insert('absen', 
+                array(
+                    'id_karyawan' => $id_karyawan,
+                    'waktu' => $kemarin,
+                    'status' => $status.' ALPHA',
+                    'hari' => 'sabtu',
+                    'bulan' => $bulan,
+                    'tahun' => $tahun
+                )
+            );
+        }
+        // jika kemarin != minggu
+        // insert hari normal
+        else{
+            $this->db->insert('absen', 
+                array(
+                    'id_karyawan' => $id_karyawan,
+                    'waktu' => $kemarin,
+                    'status' => $status.' ALPHA',
+                    'hari' => $hari,
+                    'bulan' => $bulan,
+                    'tahun' => $tahun
+                )
+            );
+        }
+
+        
 
     }
 
