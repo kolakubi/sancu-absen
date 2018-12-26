@@ -95,12 +95,12 @@
                 <?php endif ?>
             <!-- jika hari sabtu -->
             <?php else : ?>
+            <!-- jika lebih dari jam 7 -->
+            <!-- alias terlambat -->
                 <?php if($jam > 7) : ?>
-                  <?php if($menit > 0) : ?>
                     <h3 class="text-center text-success" style="font-weight: bold;">kamu terlambat</h3>
-                  <?php else : ?>
+                <?php else : ?>
                     <h3 class="text-center text-success" style="font-weight: bold;">kamu tidak terlambat</h3>
-                  <?php endif ?>
                 <?php endif ?>
             <?php endif ?>
         <?php endif ?>
